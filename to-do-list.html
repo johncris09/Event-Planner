@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>To-do-List</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<link rel="shortcut icon" type="image/x-icon" href="images/logo.png" />
+	<meta name="Event Planner" content="Do you have to plan a wedding, a party or any other event? Event Planner (Party Planning) may help you keep everything under control. It allows you to easily manage the guest list with details like gender, age, invitations, RSVP and attending.">
+	<meta name="author" content="John Cris">
+	<link href="bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+    <link href="css/event planner.css" rel="stylesheet">
+	<script src="bootstrap-3.3.7/js/jquery.min.js"></script>
+	<script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
+	<script src="js/event planner.js"></script>
+	
+	
+</head>
+
+<body>
+
+	<!-- Page Content -->
+	<div id="sidebar-wrapper">
+		<ul class="sidebar-nav">
+			<li class="sidebar-brand">
+				<img src="images/logo.png" /><br/>
+				
+			</li>
+			<br>
+			<li>
+				<a href="home.html" title="Home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home</a>
+			</li>
+			<li>
+				<a href="event.html" title="Event"><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Event</a>
+			</li>
+			<li>
+				<a href="guest.html" title="Guest"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Guest</a>
+			</li>
+			<li>
+				<a href="to-do-list.html" title="To-do-List"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To-do-List</a>
+			</li>
+			<li>
+				<a href="shopping list.html" title="Shopping List"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shopping List</a>
+			</li>
+			<li>
+				<a href="budget.html" title="Budget"><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Budget</a>
+			</li>
+			
+			<br/><br/><br/><br/>
+			<li class="sidebar-brand">
+				<script type="text/javascript">
+					var LoginUserNow = localStorage.LoginUserNow;
+					document.write("Welcome <span class='user' onclick='profile()' title='Profile Name'>"+ localStorage.getItem(LoginUserNow+"_Firstname")+"</span>");
+				</script>
+			<a href="#" class="logout" title="Log out" class="logout" onclick="$('#logoutmodal').fadeIn()"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout
+				</a>
+			</li>
+		</ul>
+	</div>
+		
+	<!-- Navigation -->
+	<nav class="navbar navbar-green">
+		<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				<span class="glyphicon glyphicon-menu-hamburger"></span>
+				<span class="icon-bar"></span>                       
+				</button>
+				<a class="navbar-brand" onclick="openNav()"><span  class="glyphicon glyphicon-chevron-right"></span>&nbsp;&nbsp;To-do-List</a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav navbar-right">
+				
+				<li><a href="#" onclick="addToDoList()" title="Add"><span class="glyphicon glyphicon-plus"></span> Add</a></li>				
+			</ul>
+		</div>
+		</div>
+	</nav>
+
+	<div onclick="closeNav()" class="content">
+		
+		
+
+		<script type="text/javascript">
+			document.write('<table class="table table-stripped table-hover table-font">');
+
+			//basis of adding guest
+			var selectedEventValueNow 	= localStorage.selectedEventValueNow;
+			var LoginUserNow 			= localStorage.LoginUserNow;
+			var numberOfTodoListt 		= localStorage.getItem(LoginUserNow + '_clickcountTodoList');
+			var ToDoListKeys 			= [
+			'TodoListName',
+			'TodoListCompleted',
+			'TodoListNote'
+			];
+			var totalofAllTodoList = totalofAllTodoListCompleted = totalofAllTodoListNotCompleted = 0;
+
+			if(selectedEventValueNow){
+
+			for(var i = 1; i <= numberOfTodoListt ; i++){
+
+			if(localStorage.getItem(selectedEventValueNow+'_'+i+'_TodoListName')){
+
+				document.write('<tr>');
+					
+					document.write('<input id='+i+' type="hidden" value='+i+' />');
+
+					if(parseInt(localStorage.getItem(selectedEventValueNow+'_'+i+'_TodoListCompleted')) == 1){
+
+						document.write('<td><input type="checkbox" onclick=localStorage.setItem(selectedEventValueNow+"_"+document.getElementById('+i+').value+"_TodoListCompleted",0);location.reload(); checked /></td>');
+						
+						totalofAllTodoListCompleted += parseInt(localStorage.getItem(selectedEventValueNow+'_'+i+'_'+ToDoListKeys[1]));
+						localStorage.setItem(selectedEventValueNow+"_totalofAllTodoListCompleted",totalofAllTodoListCompleted);
+					
+					}else{
+						document.write('<td><input type="checkbox" onclick=localStorage.setItem(selectedEventValueNow+"_"+document.getElementById('+i+').value+"_TodoListCompleted",1);location.reload();  /></td>');
+						
+						localStorage.setItem(selectedEventValueNow+"_totalofAllTodoListCompleted",totalofAllTodoListCompleted);
+						
+
+					}
+					
+					document.write('<td>'+localStorage.getItem(selectedEventValueNow+'_'+i+"_TodoListName")+'</td>');
+					document.write('<td class="text-right"><span style="cursor: pointer" title="Edit" class="glyphicon glyphicon-edit" onclick=localStorage.setItem(LoginUserNow+"_editTodoListKeyNow",selectedEventValueNow+"_"+document.getElementById('+i+').value+"_");location.href="edit_todolist.html"></span></td>');
+					document.write('<td class="text-right"><span style="cursor: pointer" title="Delete" class="glyphicon glyphicon-trash" onclick=$("#myModal").fadeIn();localStorage.setItem(LoginUserNow+"_deleteTodoListKeyNow",selectedEventValueNow+"_"+document.getElementById('+i+').value+"_");></span></td>');
+										
+
+				
+				document.write('</tr>');
+				
+				totalofAllTodoList+=1;
+				
+			}else{
+				continue;
+			}
+
+			}
+
+			localStorage.setItem(selectedEventValueNow+"_totalofAllTodoList",totalofAllTodoList);
+			localStorage.setItem(selectedEventValueNow+"_totalofAllTodoListNotCompleted", totalofAllTodoList - totalofAllTodoListCompleted);
+
+			document.write('</table>');
+
+			document.write('<table id="ShoppingListAmountRecord" class="table table-stripped text-center">');
+			document.write("<tr>");
+				document.write('<td>Total : '+localStorage.getItem(selectedEventValueNow+"_totalofAllTodoList")+'</td>');
+				if(!(localStorage.getItem(selectedEventValueNow+"_totalofAllTodoListCompleted")== null)){
+					document.write('<td>Completed : '+localStorage.getItem(selectedEventValueNow+"_totalofAllTodoListCompleted")+'</td>');
+					
+				}else{
+					document.write('<td>Completed : 0 </td>');
+					
+				}
+				
+				document.write('<td>Not Completed : '+localStorage.getItem(selectedEventValueNow+"_totalofAllTodoListNotCompleted")+'</td>');
+			document.write("</tr>");
+			document.write('</table>');
+
+			}else{
+
+			document.write('<table class="table table-stripped text-center">');
+			document.write("<tr>");
+				document.write('<td>Total : 		0	</td>');
+				document.write('<td>Completed : 	0 	</td>');
+				document.write('<td>Not Completed : 0	</td>');
+			document.write("</tr>");
+			document.write('</table>');
+
+			}
+
+		</script>	
+	
+	</div>
+	
+	<!--Modal-->	
+	<div class="modal" id="addTodoListmodal" role="dialog">
+		<div class="modal-dialog">
+
+		<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" onclick="$('#addTodoListmodal').fadeOut()">&times;</button>
+					<h4 class="modal-title">Delete!!!</h4>
+				</div>
+				<div class="modal-body">
+					<p><span class="glyphicon glyphicon-alert msg-alert-icon"></span>&nbsp;&nbsp;Please select an Event First in the Home Page!</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-green" onclick="$('#addTodoListmodal').fadeOut()"><span class="glyphicon glyphicon-ok"></span> Ok</button>
+					<button type="button" class="btn btn-danger" onclick="$('#addTodoListmodal').fadeOut()"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	
+	<!--Modal-->						
+	<div class="modal" id="myModal" role="dialog">
+		<div class="modal-dialog">
+
+		<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" onclick='$("#myModal").fadeOut()'>&times;</button>
+					<h4 class="modal-title">Delete!!!</h4>
+				</div>
+				<div class="modal-body">
+					<p><span class="glyphicon glyphicon-question-sign msg-alert-icon"></span>&nbsp;&nbsp;Do you want to delete this Record?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-green" onclick='deleteTodoList();$("#myModal").fadeOut();$("#mySecondModal").fadeIn();'><span class="glyphicon glyphicon-ok"></span> Yes</button>
+					<button type="button" class="btn btn-danger" onclick='$("#myModal").fadeOut()'><span class="glyphicon glyphicon-remove"></span> No</button>
+					<!---->
+				</div>
+			</div>
+
+		</div>
+	</div>
+				
+	<div class="modal" id="mySecondModal" role="dialog">
+		<div class="modal-dialog">
+
+		<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close"  onclick="location.reload()">&times;</button>
+					<h4 class="modal-title">Deleted!!!</h4>
+				</div>
+				<div class="modal-body">
+					<p><span class="glyphicon glyphicon-check msg-alert-icon"></span> Record Successfully Deleted!</p>
+				</div>
+				<div class="modal-footer">
+				<button type="button" class="btn btn-green" onclick="location.reload()"><span class="glyphicon glyphicon-ok"></span> Ok</button>
+					<button type="button" class="btn btn-danger" onclick="$('#mySecondModal').fadeOut()"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+					<!---->
+				</div>
+			</div>
+
+		</div>
+	</div>
+	
+	<!--Modal-->						
+	<div class="modal" id="logoutmodal" role="dialog">
+		<div class="modal-dialog">
+
+		<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" onclick='$("#logoutmodal").fadeOut()'>&times;</button>
+					<h4 class="modal-title">Logout!!!</h4>
+				</div>
+				<div class="modal-body">
+					<p><span class="glyphicon glyphicon-question-sign msg-alert-icon"></span>&nbsp;&nbsp;Do you really want to log out ?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-green" onclick='$("#logoutmodal").fadeOut(); logout()'><span class="glyphicon glyphicon-ok"></span> Yes</button>
+					<button type="button" class="btn btn-danger" onclick='$("#logoutmodal").fadeOut()'><span class="glyphicon glyphicon-remove"></span> No</button>
+					<!---->
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	
+	<!-- if user did not log in -->
+	<script src="js/loginfirst.js"></script>
+
+</body>
+</html>

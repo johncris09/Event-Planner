@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Add Guest</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<link rel="shortcut icon" type="image/x-icon" href="images/logo.png" />
+	<meta name="Event Planner" content="Do you have to plan a wedding, a party or any other event? Event Planner (Party Planning) may help you keep everything under control. It allows you to easily manage the guest list with details like gender, age, invitations, RSVP and attending.">
+	<meta name="author" content="John Cris">
+	<link href="bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+    <link href="css/event planner.css" rel="stylesheet">
+	<script src="bootstrap-3.3.7/js/jquery.min.js"></script>
+	<script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
+	<script src="js/event planner.js"></script>
+	
+</head>
+
+<body onload="getGuest()">
+
+	<!-- Page Content -->
+	<div id="sidebar-wrapper">
+		<ul class="sidebar-nav">
+			<li class="sidebar-brand">
+				<img src="images/logo.png" /><br/>
+				
+			</li>
+			<br>
+			<li>
+				<a href="home.html" title="Home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home</a>
+			</li>
+			<li>
+				<a href="event.html" title="Event"><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Event</a>
+			</li>
+			<li>
+				<a href="guest.html" title="Guest"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Guest</a>
+			</li>
+			<li>
+				<a href="to-do-list.html" title="To-do-List"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To-do-List</a>
+			</li>
+			<li>
+				<a href="shopping list.html" title="Shopping List"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shopping List</a>
+			</li>
+			<li>
+				<a href="budget.html" title="Budget"><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Budget</a>
+			</li>
+			
+			<br/><br/><br/><br/>
+			<li class="sidebar-brand">
+				<script type="text/javascript">
+					var LoginUserNow = localStorage.LoginUserNow;
+					document.write("Welcome <span class='user' onclick='profile()' title='Profile Name'>"+ localStorage.getItem(LoginUserNow+"_Firstname")+"</span>");
+				</script>
+			<a href="#" class="logout" title="Log out" class="logout" onclick="$('#logoutmodal').fadeIn()"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout
+				</a>
+			</li>
+		</ul>
+	</div>
+	
+	<!-- Navigation-->
+	<nav class="navbar navbar-green">
+		<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				<span class="glyphicon glyphicon-menu-hamburger"></span>
+				<span class="icon-bar"></span>                       
+				</button>
+				<a class="navbar-brand" onclick="openNav()"><span  class="glyphicon glyphicon-chevron-right"></span>&nbsp;&nbsp;Guest</a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="guest.html" title="Back"><span class="glyphicon glyphicon-arrow-left"></span> Back</a></li>
+			</ul>
+		</div>
+		</div>
+	</nav>
+
+	<div onclick="closeNav()" class="content">
+		
+		<form class="form" role="form">
+			<div class="form-group">
+				<label for="guest-name">Guest Name</label>
+				<input type="text" class="form-control text-field" id="guest-name" placeholder="Guest Name" title="Guest Name" autofocus/>
+			</div>
+			<div class="form-group">
+				<label for="gender">Gender</label><br/>
+				<select class="select" id="guest-gender" name="guest-gender" title="Gender">
+					<option value="Male">Male</option>
+					<option value="Female">Female</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="Age">Age</label><br/>
+				<select class="select" id="guest-age" name="guest-age" title="Age">
+					<option value="Children">Chilren</option>
+					<option value="Teenager">Teenager</option>
+					<option value="Adult">Adult</option>
+					<option value="Senior">Senior</option>
+				</select>
+					
+			</div>
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input type="email" class="form-control text-field" id="guest-email" placeholder="example@gmail.com" title="Email" title="Note"/>
+			</div>
+			<div class="checkbox">
+				<label onclick="displayRSVP()" id="invited"><input id="guest-invited" type="checkbox"/> Invited</label><br/>
+				<label onclick="displayAttending()" style="display:none"; id="rsvp"><input id="guest-rsvp" type="checkbox"/> RSVP</label>
+				<label style="display:none"; id="attending"><input id="guest-attending" type="checkbox"/> Attending</label><br/>
+			</div>
+			<div class="form-group">
+				<label for="note">Note</label>
+				<textarea class="form-control text-field" rows="5" placeholder="Note . . ." title="title" id="guest-note"></textarea>
+			</div>
+			<div class="form-group">
+				<button onclick="updateGuest()" type="button" class="btn btn-block btn-info btn-green" title="Update"><span class="glyphicon glyphicon-edit"></span> Update</button>
+			</div>
+		</form>
+	</div>
+	
+	<!--Modal-->
+	<div class="modal" id="recordsavemodal" role="dialog">
+		<div class="modal-dialog">
+
+		<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" onclick="$('#recordsavemodal').fadeOut();;$('#guest-name').focus()" > &times;</button>
+					<h4 class="modal-title">Congratulations!!!</h4>
+				</div>
+				<div class="modal-body">
+				<p><span class="glyphicon glyphicon-check msg-alert-icon"></span> Record Successfully Updated!</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-green" onclick="$('#recordsavemodal').fadeOut();;$('#guest-name').focus()" ><span class="glyphicon glyphicon-ok"></span> Ok</button>
+					<button type="button" class="btn btn-danger" onclick="$('#recordsavemodal').fadeOut();;$('#guest-name').focus()" ><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	
+	
+	<!--Modal-->
+	<div class="modal " id="recordnotsavemodal" role="dialog">
+		<div class="modal-dialog">
+
+		<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" onclick="$('#recordnotsavemodal').fadeOut();$('#guest-name').focus()"> &times;</button>
+					<h4 class="modal-title">Warning!!!</h4>
+				</div>
+				<div class="modal-body">
+				<p><span class="glyphicon glyphicon-alert msg-alert-icon"></span>&nbsp;&nbsp;&nbsp;Please fill-up some fields!	</p>
+				
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-green" onclick="$('#recordnotsavemodal').fadeOut();$('#guest-name').focus()"><span class="glyphicon glyphicon-ok"></span> Ok</button>
+					<button type="button" class="btn btn-danger" onclick="$('#recordnotsavemodal').fadeOut();$('#event-name').focus()"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	
+	<!--Modal-->						
+	<div class="modal" id="logoutmodal" role="dialog">
+		<div class="modal-dialog">
+
+		<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" onclick='$("#logoutmodal").fadeOut()'>&times;</button>
+					<h4 class="modal-title">Logout!!!</h4>
+				</div>
+				<div class="modal-body">
+					<p><span class="glyphicon glyphicon-question-sign msg-alert-icon"></span>&nbsp;&nbsp;Do you really want to log out ?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-green" onclick='$("#logoutmodal").fadeOut(); logout()'><span class="glyphicon glyphicon-ok"></span> Yes</button>
+					<button type="button" class="btn btn-danger" onclick='$("#logoutmodal").fadeOut()'><span class="glyphicon glyphicon-remove"></span> No</button>
+					<!---->
+				</div>
+			</div>
+
+		</div>
+	</div>
+    
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	
+	<!-- if user did not log in -->
+	<script src="js/loginfirst.js"></script>
+	
+	
+
+</body>
+</html>

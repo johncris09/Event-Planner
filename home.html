@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<link rel="shortcut icon" type="image/x-icon" href="images/logo.png" />
+	<meta name="Event Planner" content="Do you have to plan a wedding, a party or any other event? Event Planner (Party Planning) may help you keep everything under control. It allows you to easily manage the guest list with details like gender, age, invitations, RSVP and attending.">
+	<meta name="author" content="John Cris">
+	<link href="bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+    <link href="css/event planner.css" rel="stylesheet">
+	<script src="bootstrap-3.3.7/js/jquery.min.js"></script>
+	<script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
+	<script src="js/event planner.js"></script>
+	
+</head>
+
+<body onload="refresh()">
+	<!-- Page Content -->
+	<div id="sidebar-wrapper">
+		<ul class="sidebar-nav">
+			<li class="sidebar-brand">
+				<img src="images/logo.png" /><br/>
+				
+			</li>
+			<br>
+			<li>
+				<a href="home.html" title="Home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home</a>
+			</li>
+			<li>
+				<a href="event.html" title="Event"><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Event</a>
+			</li>
+			<li>
+				<a href="guest.html" title="Guest"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Guest</a>
+			</li>
+			<li>
+				<a href="to-do-list.html" title="To-do-List"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To-do-List</a>
+			</li>
+			<li>
+				<a href="shopping list.html" title="Shopping List"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shopping List</a>
+			</li>
+			<li>
+				<a href="budget.html" title="Budget"><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Budget</a>
+			</li>
+			
+			<br/><br/><br/><br/>
+			<li class="sidebar-brand">
+				<script type="text/javascript">
+					var LoginUserNow = localStorage.LoginUserNow;
+					document.write("Welcome <span class='user' onclick='profile()' title='Profile Name'>"+ localStorage.getItem(LoginUserNow+"_Firstname")+"</span>");
+				</script>
+			<a href="#" class="logout" title="Log out" class="logout" onclick="$('#logoutmodal').fadeIn()"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout
+				</a>
+			</li>
+		</ul>
+	</div>
+	
+	<!-- Navigation-->
+	<nav class="navbar navbar-green">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>                        
+				</button>
+				<a class="navbar-brand" onclick="openNav()"><span  class="glyphicon glyphicon-chevron-right"></span>&nbsp;&nbsp;Home</a>
+			</div>
+		</div>
+	</nav>
+	
+	<!-- Main Content -->`
+	<div onclick="closeNav()"  class="content">
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="container-fluid">
+					<table class="full-width">
+						<tr>
+							<td><h3>Event</h3></td>
+							<td>
+								<script type="text/javascript">
+									var LoginUserNow 	= localStorage.LoginUserNow;
+									var numberOfEvent 	= localStorage.getItem(LoginUserNow + '_clickcountEvent');
+									
+									document.write('<select onchange="select()" id="display_all_event" class="select event-name full-width">');
+									
+									
+									for(var i = 1; i <= numberOfEvent ;i++){
+										
+										var display_event = localStorage.getItem(localStorage.LoginUserNow + '_' + i + '_' + 'EventName');
+										if(display_event){
+											var eventName = 'eventName_' + i;
+											document.write('<option id= "' + eventName  + '" value="' + display_event + '">' + display_event +'</option>');
+										
+										}else{
+											
+											continue;
+										}
+									}
+
+									document.write('</select>');
+								</script>
+							</td>
+						</tr>
+					</table>
+					<p>Completed Task</p>	
+					<table class="full-width">
+						<tr>
+							<td>
+								<div class="progress">
+									<div id="display_progress" class=" progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</td>
+						</tr>
+					</table>
+					<p>Budget</p>
+					<table class="table table-hover table-striped">
+						<tr>
+							<td>Total : <span id="display_budget_total">00.00</span></td>
+							<td>Paid : <span id="display_budget_paid">00.00</span></td>
+							<td>Due to Pay : <span id="display_budget_due_to_pay">00.00</span></td>
+						<tr>
+						
+					</table>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="container-fluid">
+					
+					<table>
+						<tr>
+							<td>Age &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td>
+								<select id="selectAge" onchange="getAge()" class="select">
+									<option value="All">		All			</option>
+									<option value="Children">	Children	</option>
+									<option value="Teenagers">	Teenagers	</option>
+									<option value="Adults">		Adults		</option>
+									<option value="Seniors">	Seniors		</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+					<br>
+					<table class="table  table-condensed table-hover table-striped">
+						<tr>
+							<td></td>
+							<td class="text-center">Total</td>
+							<td class="text-center">Invited</td>
+							<td class="text-center">RSVP</td>
+							<td class="text-center">Attending</td>
+							<td class="text-center">Decline</td>
+						</tr>
+						<tr>
+							<td class="text-left">All</td>
+							<td class="text-center"><span id="total-gender">0<span></td>
+							<td class="text-center"><span id="total-invited">0<span></td>
+							<td class="text-center"><span id="total-rsvp"><span>0</td>
+							<td class="text-center"><span id="total-attending">0<span></td>
+							<td class="text-center"><span id="total-decline">0<span></td>
+							
+						</tr>
+						<tr>
+							<td>Male</td>
+							<td class="text-center"><span id="total-male">0</span></td>
+							<td class="text-center"><span id="total-male-invited">0</span></td>
+							<td class="text-center"><span id="total-male-rsvp">0</span></td>
+							<td class="text-center"><span id="total-male-attending">0</span></td>
+							<td class="text-center"><span id="total-male-decline">0</span></td>
+						</tr>
+						<tr>
+							<td>Female</td>
+							<td class="text-center"><span id="total-female">0</span></td>
+							<td class="text-center"><span id="total-female-invited">0</span></td>
+							<td class="text-center"><span id="total-female-rsvp">0</span></td>
+							<td class="text-center"><span id="total-female-attending">0</span></td>
+							<td class="text-center"><span id="total-female-decline">0</span></td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td>Gender &nbsp;&nbsp;&nbsp;</td>
+							<td>
+								<select onchange="getGender()" id="select_gender" class="select">
+									<option value="All">All</option>
+									<option value="Male">Male</option>
+									<option value="Female">Female</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+					<br>
+					<table class=" table  table-condensed table-striped table-hover ">
+						<tr>
+							<td></td>
+							<td class="text-center">Total</td>
+							<td class="text-center">Invited</td>
+							<td class="text-center">RSVP</td>
+							<td class="text-center">Attending</td>
+							<td class="text-center">Decline</td>
+						</tr>
+						<tr>
+							<td class="text-left">All</td>
+							<td class="text-center"><span id="total_gender">0</span></td>
+							<td class="text-center"><span id="total_invited">0</span></td>
+							<td class="text-center"><span id="total_rsvp">0</span></td>
+							<td class="text-center"><span id="total_attednding">0</span></td>
+							<td class="text-center"><span id="total_decline">0</span></td>
+						</tr>
+						<tr>
+							<td class="text-left">Children</td>
+							<td class="text-center"><span id="total_children">0</span></td>
+							<td class="text-center"><span id="total_children_invited">0</span></td>
+							<td class="text-center"><span id="total_children_rsvp">0</span></td>
+							<td class="text-center"><span id="total_children_attending">0</span></td>
+							<td class="text-center"><span id="total_children_decline">0</span></td>
+						</tr>
+						<tr>
+							<td class="text-left">Teenagers</td>
+							<td class="text-center"><span id="total_teenagers">0</span></td>
+							<td class="text-center"><span id="total_teenagers_invited">0</span></td>
+							<td class="text-center"><span id="total_teenagers_rsvp">0</span></td>
+							<td class="text-center"><span id="total_teenagers_attending">0</span></td>
+							<td class="text-center"><span id="total_teenagers_decline">0</span></td>
+						</tr>
+						<tr>
+							<td class="text-left">Adults</td>
+							<td class="text-center"><span id="total_adults">0</span></td>
+							<td class="text-center"><span id="total_adults_invited">0</span></td>
+							<td class="text-center"><span id="total_adults_rsvp">0</span></td>
+							<td class="text-center"><span id="total_adults_attending">0</span></td>
+							<td class="text-center"><span id="total_adults_decline">0</span></td>
+						</tr>
+						<tr>
+							<td class="text-left">Seniors</td>
+							<td class="text-center"><span id="total_seniors">0</span></td>
+							<td class="text-center"><span id="total_seniors_invited">0</span></td>
+							<td class="text-center"><span id="total_seniors_rsvp">0</span></td>
+							<td class="text-center"><span id="total_seniors_attending">0</span></td>
+							<td class="text-center"><span id="total_seniors_decline">0</span></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+	<!--Modal-->						
+	<div class="modal" id="logoutmodal" role="dialog">
+		<div class="modal-dialog">
+
+		<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" onclick='$("#logoutmodal").fadeOut()'>&times;</button>
+					<h4 class="modal-title">Logout!!!</h4>
+				</div>
+				<div class="modal-body">
+					<p><span class="glyphicon glyphicon-question-sign msg-alert-icon"></span>&nbsp;&nbsp;Do you really want to log out ?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-green" onclick='$("#logoutmodal").fadeOut(); logout()'><span class="glyphicon glyphicon-ok"></span> Yes</button>
+					<button type="button" class="btn btn-danger" onclick='$("#logoutmodal").fadeOut()'><span class="glyphicon glyphicon-remove"></span> No</button>
+					<!---->
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	
+	
+	
+</body>
+</html>

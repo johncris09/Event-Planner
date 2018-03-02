@@ -1,0 +1,4 @@
+
+if(!(LoginUserNow)){
+	$('#loginfirst').fadeIn();
+}
