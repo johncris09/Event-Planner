@@ -1,5 +1,7 @@
 # Event-Planner
 
+
+
 Do you have to plan a wedding, a party or any other event? Event Planner (Party Planning) may help you keep everything under control. It allows you to easily manage the guest list with details like gender, age, invitations, RSVP and attending. 
 
 Event Planner (Party Planning) features a set of tools to help you plan and organize your wedding, party or any other event: 
@@ -18,3 +20,5 @@ The shopping list and the budget tool will help you to keep under control the sp
 With Event Planner (Party Planning) you can organize multiple events at the same time, from simple parties to more important events.
 
 Tags: wedding, party, event, planner, guest list, todo list, shopping list, budget, tool, rsvp
+
+
