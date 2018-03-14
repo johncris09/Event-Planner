@@ -19,7 +19,8 @@ You will not forget to take care of anything by using the TODO list in order to 
 
 The shopping list and the budget tool will help you to keep under control the spendings for your wedding / party / event. 
 
-The User account tool will help you to manage your account and help you secured your event. You can also update your account
+The user account tool will help you to keep secure your event, you can also edit and update your profile.
+
 With Event Planner (Party Planning) you can organize multiple events at the same time, from simple parties to more important events.
 
 Tags: wedding, party, event, planner, guest list, todo list, shopping list, budget, tool, rsvp
