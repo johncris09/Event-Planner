@@ -9,7 +9,7 @@ Event Planner (Party Planning) features a set of tools to help you plan and orga
 - todo list
 - shopping list 
 - budget planner. 
-
+- user account 
 You can split bigger events like your wedding in smaller ones like bachelorette party, ceremony and reception.
 You can easily switch between events and also copy guests list from one to another.
 
